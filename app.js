@@ -2,6 +2,7 @@
 const passwordDisplay = document.getElementById('password-display');
 const copy = document.getElementById('copy');
 const form = document.querySelector('form');
+const checkboxes = document.querySelectorAll('input[type=checkbox]')
 
 // function to create characters array
 const generateArray = (min, max) => {
@@ -91,6 +92,35 @@ const shufflePassword = (password) => {
     passwordDisplay.innerHTML = shuffledPassword;
 };
 
+// loop thru all checkbox
+checkboxes.forEach( (checkbox, index) => {
+
+    // add event listener to each checkbox
+    checkbox.addEventListener('click', () => {
+
+        // assign HTML DOM elements
+        const toggle = document.querySelectorAll('.toggle');
+        const circle = document.querySelectorAll('.circle');
+
+        // if checkbox is checked
+        if(checkbox.checked) {
+
+            // toggle checked class
+            circle[index].classList.toggle('checked');
+
+            // change background color
+            toggle[index].style.backgroundColor = '#1997f0';
+        } else {
+
+            // else toggle checked class
+            circle[index].classList.toggle('checked');
+
+            // change background color back to default
+            toggle[index].style.backgroundColor = 'grey';
+        }
+    });
+});
+
 // add event listener to form submit button
 form.addEventListener('submit', (e) => {
 
@@ -132,8 +162,8 @@ copy.addEventListener('click', () => {
 
         // remove textarea from HTML body
         textarea.remove();
-
-        // alert
-        alert('Copied to clipboard');
+        
     }
+
+    passwordDisplay.innerHTML = 'COPIED';
 })
